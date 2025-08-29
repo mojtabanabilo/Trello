@@ -3,10 +3,12 @@
         <div class="p-6 flex justify-between space-x-6 border-b border-gray-200">
             <div class="flex justify-center items-center space-x-10">
                 <img :src="trelloLogo" alt="trello" class="cursor-pointer" />
+                <splitter />
                 <div class="flex justify-center items-start space-x-1 cursor-pointer">
                     <img :src="boardLogo" alt="board" />
                     <p class="font-bold">Boards</p>
                 </div>
+                <splitter />
                 <div class="relative w-100">
                     <input type="text" id="Search"
                         class="rounded-2xl px-4 mt-0.5 w-full h-10 bg-gray-100 border-gray-300 shadow-sm sm:text-sm outline-none" />
