@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="min-h-screen">
     <Header />
     <Bracket />
     <Boards />
