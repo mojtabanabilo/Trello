@@ -27,9 +27,32 @@ export interface Card {
   extraUsers: number
 }
 export interface Board {
-  id: string,
+  id: string
   name: string
   actions: string[]
   cards: any[]
 }
 // boards
+
+// AddCardsModal
+export interface CardForm {
+  image: string
+  title: string
+  description: string
+  progress: {
+    value: number
+    color: string
+  }
+  stats: {
+    likes: number
+    comments: number
+    bookmarks: number
+  }
+  users: {
+    id: number
+    name: string
+    avatar: string
+  }[]
+  extraUsers: number
+}
+// AddCardsModal

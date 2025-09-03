@@ -1,17 +1,17 @@
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { Board } from '@/types/types'
 
 const ID = function uuidv4() {
-  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
-  );
+  return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c) =>
+    (+c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))).toString(16),
+  )
 }
 
 export const useBoardStore = defineStore('board', () => {
-  const boards: Board[] = reactive([])
-  const addBoard: Function = (name: string) => {
-    boards.push({
+  const boards = ref<Board[]>([])
+  const addBoard: Function = (name: string): void => {
+    boards.value.push({
       id: ID(),
       name,
       actions: ['Delete', 'New Card'],
@@ -19,7 +19,16 @@ export const useBoardStore = defineStore('board', () => {
     })
   }
 
-  return { addBoard, boards }
+  const deleteBoard: Function = (id: string): void => {
+    boards.value = boards.value.filter((item) => item.id !== id)
+  }
+
+  const addNewCard: Function = (id: string, data: Object): void => {
+    const currentBoard = boards.value.find((i) => i.id === id)
+    currentBoard?.cards.push(data)
+  }
+
+  return { addBoard, boards, deleteBoard, addNewCard }
 })
 
 // [

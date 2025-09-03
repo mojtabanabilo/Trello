@@ -2,6 +2,11 @@
     <div class="p-6 flex min-h-50 gap-4 justify-start items-start overflow-x-auto flex-nowrap">
         <div class="flex flex-nowrap gap-4">
             <BoardsSection />
+            <template v-for="board in storeBoard.boards" :key="board.id">
+                <template v-for="card in board.cards" :key="card.id">
+                    <CardsSection :card="card" />
+                </template>
+            </template>
         </div>
         <div class="relative shrink-0 w-80 text-white bg-gray-400 hover:bg-gray-500 cursor-pointer duration-500 p-3 rounded cursor-pointer"
             @click="showModal = true">
@@ -21,12 +26,12 @@ import { ref } from "vue";
 import addIcon from "@/assets/icon/icons8-add-50.png"
 import { useBoardStore } from "@/stores/board";
 import BoardsSection from "./BoardsSection.vue";
+import CardsSection from "./CardsSection.vue";
 const storeBoard = useBoardStore()
 const showModal = ref<boolean>(false)
 
 const handleSave = (val: string): void => {
     storeBoard.addBoard(val)
     showModal.value = false
-    console.log(storeBoard.boards)
 }
 </script>
