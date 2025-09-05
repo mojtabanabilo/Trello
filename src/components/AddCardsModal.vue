@@ -1,29 +1,22 @@
 <template>
-    <!-- بک‌دراب -->
     <div v-if="show" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <!-- جعبه مدال -->
         <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg p-6 relative">
-            <!-- دکمه بستن -->
             <button @click="$emit('cancel')" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">
                 ✕
             </button>
 
             <h2 class="text-xl font-semibold mb-4">Add / Edit Card</h2>
 
-            <!-- فرم -->
             <form @submit.prevent="handleSave" class="space-y-4">
-                <!-- تصویر -->
                 <div>
                     <label class="block text-sm font-medium mb-1">Upload Image</label>
                     <input type="file" accept="image/*" @change="handleFileUpload"
                         class="w-full bg-gray-200 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 outline-none" />
-                    <!-- پیش‌نمایش -->
                     <div v-if="form.image" class="mt-2">
-                        <img :src="form.image" alt="Preview" class="w-full h-40 object-cover rounded-lg border" />
+                        <img :src="form.image" alt="Preview" class="w-full h-40 object-contain rounded-lg border" />
                     </div>
                 </div>
 
-                <!-- عنوان -->
                 <div>
                     <label class="block text-sm font-medium mb-1">Title</label>
                     <input v-model="form.title" type="text"
@@ -31,7 +24,6 @@
                         placeholder="Enter card title" />
                 </div>
 
-                <!-- توضیحات -->
                 <div>
                     <label class="block text-sm font-medium mb-1">Description</label>
                     <textarea v-model="form.description" rows="3"
@@ -39,7 +31,6 @@
                         placeholder="Enter description"></textarea>
                 </div>
 
-                <!-- دکمه‌ها -->
                 <div class="flex justify-end gap-3 pt-4">
                     <button type="button" @click="$emit('cancel')"
                         class="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300">
@@ -82,9 +73,9 @@ const form = reactive<CardForm>({
         bookmarks: 66,
     },
     users: [
-        { id: 1, name: 'User 1', avatar: 'https://example.com/u1.jpg' },
-        { id: 2, name: 'User 2', avatar: 'https://example.com/u2.jpg' },
-        { id: 3, name: 'User 3', avatar: 'https://example.com/u3.jpg' },
+        { id: 1, name: 'User 1', avatar: 'https://i.pravatar.cc/100?img=1' },
+        { id: 2, name: 'User 2', avatar: 'https://i.pravatar.cc/100?img=2' },
+        { id: 3, name: 'User 3', avatar: 'https://i.pravatar.cc/100?img=3' },
     ],
     extraUsers: 1,
 })

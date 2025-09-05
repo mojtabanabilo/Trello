@@ -1,13 +1,6 @@
 <template>
     <div class="p-6 flex min-h-50 gap-4 justify-start items-start overflow-x-auto flex-nowrap">
-        <div class="flex flex-nowrap gap-4">
-            <BoardsSection />
-            <template v-for="board in storeBoard.boards" :key="board.id">
-                <template v-for="card in board.cards" :key="card.id">
-                    <CardsSection :card="card" />
-                </template>
-            </template>
-        </div>
+        <BoardsSection />
         <div class="relative shrink-0 w-80 text-white bg-gray-400 hover:bg-gray-500 cursor-pointer duration-500 p-3 rounded cursor-pointer"
             @click="showModal = true">
             <button>Add board</button>

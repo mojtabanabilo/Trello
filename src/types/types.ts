@@ -36,6 +36,7 @@ export interface Board {
 
 // AddCardsModal
 export interface CardForm {
+  id?: string,
   image: string
   title: string
   description: string
