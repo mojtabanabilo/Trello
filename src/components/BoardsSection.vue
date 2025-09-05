@@ -13,9 +13,9 @@
                 <CardsSection v-for="card in item.cards" :key="card.id" :card="card" />
             </template>
         </div>
-        <AddCardsModal :show="showModal" :initialData="selectedCard" @save="handleSave(saveBoradId, $event)"
-            @cancel="showModal = false" />
     </template>
+    <AddCardsModal :show="showModal" :initialData="selectedCard" @save="handleSave(saveBoradId, $event)"
+        @cancel="showModal = false" />
 </template>
 <script setup lang="ts">
 import AddCardsModal from './AddCardsModal.vue';
@@ -24,11 +24,7 @@ import { useBoardStore } from '@/stores/board';
 import type { CardForm } from '@/types/types';
 import Options from './Options.vue';
 import { ref } from 'vue';
-const ID = function uuidv4() {
-    return '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, (c) =>
-        (+c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))).toString(16),
-    )
-}
+import { ID } from '@/helper/utils';
 const showModal = ref<boolean>(false)
 const saveBoradId = ref<string>('')
 const selectedCard = ref<CardForm>({
@@ -53,7 +49,7 @@ const selectedCard = ref<CardForm>({
     extraUsers: 1,
 })
 const storeBoard = useBoardStore()
-const createCardsBoard: Function = (id: string): void => {
+const createCardsBoard = (id: string): void => {
     selectedCard.value = {
         image: '',
         title: '',
@@ -77,7 +73,7 @@ const createCardsBoard: Function = (id: string): void => {
     saveBoradId.value = id
     showModal.value = true
 }
-const handleSave: Function = (id: string, data: CardForm) => {
+const handleSave = (id: string, data: CardForm) => {
     storeBoard.addNewCard(id, {
         ...data,
         id: ID(),
