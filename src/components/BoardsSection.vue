@@ -59,10 +59,6 @@ const selectedCard = ref<CardForm>({
     extraUsers: 1,
 })
 const storeBoard = useBoardStore()
-// Handle changes
-const onListChange = (event: any) => {
-    console.log('List changed:', event)
-}
 const createCardsBoard = (id: string): void => {
     selectedCard.value = {
         image: '',

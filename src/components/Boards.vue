@@ -19,7 +19,6 @@ import { ref } from "vue";
 import addIcon from "@/assets/icon/icons8-add-50.png"
 import { useBoardStore } from "@/stores/board";
 import BoardsSection from "./BoardsSection.vue";
-import CardsSection from "./CardsSection.vue";
 const storeBoard = useBoardStore()
 const showModal = ref<boolean>(false)
 
