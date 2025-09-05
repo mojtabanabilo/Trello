@@ -9,9 +9,17 @@
                         @newCard="createCardsBoard(item.id)" />
                 </span>
             </div>
-            <template v-if="item.cards.length > 0">
-                <CardsSection v-for="card in item.cards" :key="card.id" :card="card" />
-            </template>
+            <draggable v-model="item.cards" :group="{ name: 'cards', pull: true, put: true }" @change="onListChange"
+                @start="drag = true" @end="drag = false" item-key="id">
+                <template #item="{ element }">
+                    <CardsSection :card="element" />
+                </template>
+                <template #footer>
+                    <div v-if="item.cards.length === 0" class="flex justify-center items-center text-gray-400 text-xl text-center bg-gray-100 h-50">
+                        Drop cards here
+                    </div>
+                </template>
+            </draggable>
         </div>
     </template>
     <AddCardsModal :show="showModal" :initialData="selectedCard" @save="handleSave(saveBoradId, $event)"
@@ -19,6 +27,7 @@
 </template>
 <script setup lang="ts">
 import AddCardsModal from './AddCardsModal.vue';
+import draggable from 'vuedraggable'
 import CardsSection from './CardsSection.vue';
 import { useBoardStore } from '@/stores/board';
 import type { CardForm } from '@/types/types';
@@ -26,6 +35,7 @@ import Options from './Options.vue';
 import { ref } from 'vue';
 import { ID } from '@/helper/utils';
 const showModal = ref<boolean>(false)
+const drag = ref<boolean>(false)
 const saveBoradId = ref<string>('')
 const selectedCard = ref<CardForm>({
     id: ID(),
@@ -49,6 +59,10 @@ const selectedCard = ref<CardForm>({
     extraUsers: 1,
 })
 const storeBoard = useBoardStore()
+// Handle changes
+const onListChange = (event: any) => {
+    console.log('List changed:', event)
+}
 const createCardsBoard = (id: string): void => {
     selectedCard.value = {
         image: '',

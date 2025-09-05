@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white rounded-2xl shadow p-4 w-full max-w-sm">
+    <div class="bg-white rounded-2xl shadow p-4 w-full max-w-sm mt-5">
         <img :src="card.image" alt="Card image" class="w-full h-48 object-contain rounded-xl mb-4" />
 
         <h3 class="font-semibold text-lg mb-1 line-clamp-2">
